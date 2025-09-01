@@ -4,7 +4,7 @@ from collections import defaultdict
 INF = float("inf")
 
 def DFS(v, parent, graph, disc, low, time, S, val, dp):
-    print("hi", v)
+
     time[0] += 1
     disc[v] = low[v] = time[0]
 
@@ -23,14 +23,13 @@ def DFS(v, parent, graph, disc, low, time, S, val, dp):
 
         if(flag == False or (flag == True and S[-1:] == [(v, u)] and low[u] > disc[v])):
             if low[u] == disc[v] or S[-1:] == [(v, u)]:
-                print("backedge: ", v, " ", u)
                 block_edges = []
                 while S:
                     e = S.pop()
                     block_edges.append(e)
                     if v in e:
                         break
-                print(block_edges)        
+                       
                 # Collect vertices in this block
                 C = set([x for edge in block_edges for x in edge if x != v])
 
@@ -41,8 +40,7 @@ def DFS(v, parent, graph, disc, low, time, S, val, dp):
 
                 min1 = diffs[0] if len(diffs) > 0 else 1
                 min2 = diffs[1] if len(diffs) > 1 else 1
-                print(diffs)
-                print(s, min1, min2)
+                
                 if len(C) == 1:
                     # single-edge block
                     val[v][0][0] = 1 + s
@@ -60,8 +58,6 @@ def DFS(v, parent, graph, disc, low, time, S, val, dp):
                 dp[v][0] += min([val[v][1][0], val[v][1][1] if val[v][1][1] != -1 else INF])
                 dp[v][1] += min([val[v][1][0], val[v][1][1] if val[v][1][1] != -1 else INF])
 
-                print(val)
-                print(dp)
                 # update min_dp
                 for i in range(3):
                     for j in range(2):
@@ -73,7 +69,6 @@ def DFS(v, parent, graph, disc, low, time, S, val, dp):
     if(min_dp == INF):
         min_dp = 0
     dp[v][0] = max([dp[v][0] + min_dp, 1])
-    print("vertex: ", v, " ->", dp[v][0], dp[v][1], min_dp)
 
     
 
@@ -92,16 +87,12 @@ def compute_Z0(graph):
         time = [0]  # mutable integer
         val = {u: [[-1 for _ in range(3)] for _ in range(2)] for u in V}
         dp = {u: [0, 0] for u in V}
-        print("root: ", root)
+
         DFS(root, None, graph, disc, low, time, S, val, dp)
         ans = min(ans, dp[root][0])
 
     return ans
 
-
-# -------------------------
-# Run the algorithm
-# -------------------------
 if __name__ == "__main__":
     # Input format:
     # n m
