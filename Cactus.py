@@ -91,6 +91,8 @@ def compute_Z0(graph):
         DFS(root, None, graph, disc, low, time, S, val, dp)
         ans = min(ans, dp[root][0])
 
+        print(root)
+        print(dp)
     return ans
 
 if __name__ == "__main__":
@@ -102,17 +104,17 @@ if __name__ == "__main__":
     # um vm
     n, m = map(int, input("Enter number of vertices and edges (n m): ").split())
     graph = defaultdict(list)
-
+    #graph = {1: [2, 7, 10], 2: [1, 3, 10, 6], 3: [2, 4, 6, 8], 4: [3, 5, 8, 9], 5: [4], 6: [3, 2], 7: [1], 8: [4, 3], 9: [4], 10: [2, 1]}
     print("Enter the edges (u v):")
     for _ in range(m):
         u, v = map(int, input().split())
         graph[u].append(v)
         graph[v].append(u)
 
-    # Ensure all vertices are in graph
-    for v in range(1, n+1):
-        if v not in graph:
-            graph[v] = []
+    #Ensure all vertices are in graph
+    # for v in range(1, n+1):
+    #     if v not in graph:
+    #         graph[v] = []
 
     result = compute_Z0(graph)
     print("Z0(G) =", result)
