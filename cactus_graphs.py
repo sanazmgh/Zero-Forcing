@@ -50,7 +50,7 @@ def dfs(v, parent, graph, disc, low, time, stack, val, dp, seen_edges):
                 min1 = diffs[0] if len(diffs) > 0 else 1
                 min2 = diffs[1] if len(diffs) > 1 else 1
                 
-                if len(C) == 1:
+                if len(cycle) == 1:
                     val[v][0][0] = 1 + summation
                     val[v][0][1] = summation + min1
                     val[v][1][0] = summation
