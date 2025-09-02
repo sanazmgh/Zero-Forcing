@@ -39,7 +39,7 @@ def find_blocks(graph):
 
     return blocks
 
-def compute_Z0(graph):
+def compute_Z(graph):
     blocks = find_blocks(graph)
     colored = {v: 0 for v in graph}
     removed = {v: 0 for v in graph}
@@ -163,13 +163,13 @@ def run_experiment(n):
     print(f"Blocks: {blocks}")
 
     start = time.time()
-    z0 = compute_Z0(graph)
+    z = compute_Z(graph)
     end = time.time()
 
-    print(f"Z0: {z0}")
+    print(f"Z: {z}")
     print(f"Running time: {end - start:.6f} seconds")
 
-    return graph, edges, z0, (end - start)
+    return graph, edges, z, (end - start)
 
 
 if __name__ == "__main__":
